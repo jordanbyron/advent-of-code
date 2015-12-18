@@ -44,6 +44,12 @@ RecipeScorer = ->(ingredient_ratios) {
   sum.values.inject(&:*)
 }
 
+CalorieScorer = ->(ingredient_ratios) {
+  ingredient_ratios.inject(0) do |sum, (q, i)|
+    sum + q * i.calories
+  end
+}
+
 describe 'RecipeScorer' do
   let(:ingredients) { IngredientParser[[
     'Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8',
@@ -55,34 +61,29 @@ describe 'RecipeScorer' do
 end
 
 ingredients = IngredientParser[@input.split("\n")]
-result = 0
+part_one_result = 0
+part_two_result = 0
 
-(0..100).each do |a|
-  (0..100).each do |b|
-    if a + b <= 100
-      (0..100).each do |c|
-        if a + b + c <= 100
-          (0..100).each do |d|
-            if a + b + c + d == 100
-              ratio = [a, b, c, d]
+(0..100).to_a.permutation(4).each do |ratio|
+  next unless ratio.inject(0) {|s, i| s + i } == 100
 
-              h = {}
+  h = {}
 
-              ratio.each_with_index do |amount, i|
-                h[amount] = ingredients[i]
-              end
+  ratio.each_with_index do |amount, i|
+    h[amount] = ingredients[i]
+  end
 
-              score = RecipeScorer[h]
+  score = RecipeScorer[h]
 
-              if score > result
-                result = score
-              end
-            end
-          end
-        end
-      end
-    end
+  if score > part_one_result
+    part_one_result = score
+  end
+
+  if CalorieScorer[h] == 500 && score > part_two_result
+    part_two_result = score
   end
 end
 
-puts result
+puts part_one_result
+puts "---"
+puts part_two_result
