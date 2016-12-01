@@ -1,7 +1,24 @@
 Advent of Code
 ==============
 
-My ruby based solutions for the 2015 [Advent of Code](http://adventofcode.com/)
+My ruby based solutions for the 2015 and 2016 
+[Advent of Code](http://adventofcode.com/)
+
+## Running
+
+Most examples can be run right from `ruby` and will output the calculated answer
+as well as run any specs:
+
+    $ ruby 2015/1-elevator/part_one.rb
+
+If you are actively working on an example you can use guard to speed things
+along:
+
+    $ bundle exec guard
+
+## TODO
+
+- Fix 2015 examples now that they've all moved into the `2015` folder
 
 ## License
 
