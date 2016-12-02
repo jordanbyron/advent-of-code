@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'reverse_markdown'
+require 'fileutils'
+require 'nokogiri'
+require 'pry'
+
+DAY         = ARGV[0].to_i
+YEAR        = Date.today.year
+URL         = "http://adventofcode.com/#{YEAR}/day/#{DAY}"
+TITLE_REGEX = /---\sDay\s\d+:\s(?<title>.*)\s---/
+
+html    = Nokogiri::HTML.parse(`curl #{URL}`)
+article = html.css('article')
+title   = TITLE_REGEX.match(article.css('h2').text)[:title]
+path    = "#{YEAR}/#{DAY}-#{title.downcase.gsub(/\s/,'-')}"
+
+markdown = ReverseMarkdown.convert(article.to_s, github_flavored: true)
+markdown += "[Source](#{URL})"
+
+FileUtils.mkdir_p path
+File.write("#{path}/README.md", markdown)
+
+puts "Day #{DAY}: #{title} Created => #{path}"

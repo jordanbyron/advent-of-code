@@ -4,6 +4,14 @@ Advent of Code
 My ruby based solutions for the 2015 and 2016 
 [Advent of Code](http://adventofcode.com/)
 
+## Getting new challenges
+
+Ready to start day X, where X is the day number? We've got you covered:
+
+    $ bin/fetch_day X
+
+That will create your folder and pull down a README
+
 ## Running
 
 Most examples can be run right from `ruby` and will output the calculated answer
