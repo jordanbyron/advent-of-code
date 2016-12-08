@@ -9,7 +9,7 @@ require 'pry'
 DAY         = ARGV[0].to_i
 YEAR        = Date.today.year
 URL         = "http://adventofcode.com/#{YEAR}/day/#{DAY}"
-TITLE_REGEX = /---\sDay\s\d+:\s(?<title>[\w\s]*)[\W]*\s---/
+TITLE_REGEX = /---\sDay\s\d+:\s(?<title>[\w\-\s]*)[\W]*\s---/
 
 html    = Nokogiri::HTML.parse(`curl #{URL}`)
 article = html.css('article')
