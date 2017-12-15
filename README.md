@@ -1,7 +1,7 @@
 Advent of Code
 ==============
 
-My ruby based solutions for the 2015 and 2016 
+My ruby based solutions for the 2015, 2016, and 2017
 [Advent of Code](http://adventofcode.com/)
 
 ## Getting new challenges
@@ -10,7 +10,7 @@ Ready to start day X, where X is the day number? We've got you covered:
 
     $ bin/fetch_day X
 
-That will create your folder and pull down a README
+That will create your folder and pull down a README for part one.
 
 ## Running
 
